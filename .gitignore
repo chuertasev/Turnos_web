@@ -1,0 +1,27 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs and local files
+*.log
+*.csv
+
+# Flask-specific
+instance/
+.env
+
+# IDEs and editors
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PyInstaller
+dist/
+build/
+*.spec
