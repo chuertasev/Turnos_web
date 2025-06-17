@@ -13,5 +13,9 @@ Este proyecto es una aplicación web desarrollada con Flask y SQLite para regist
 1. Clona el repositorio:
 2. Instala Flask (si no lo tienes)
 3. Ejecuta la app
+   
+Prueba aqui:
+https://chuertasev.pythonanywhere.com/
+
 ## Autor
 Carlos Huerta – Proyecto de aprendizaje continuo.
