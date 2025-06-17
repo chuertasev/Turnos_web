@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Turnos Médicos</title>
+    <style>
+        body { font-family: Arial; max-width: 700px; margin: auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .error { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Registro de Turnos Médicos</h1>
+    <form method="post" action="/">
+        <input type="hidden" name="editar_index" value="{{ index if editar else '' }}">
+
+        <label>Nombre:</label><br>
+        <input type="text" name="nombre" value="{{ editar.nombre if editar else '' }}"><br><br>
+
+        <label>Edad:</label><br>
+        <input type="number" name="edad" value="{{ editar.edad if editar else '' }}"><br><br>
+
+        <label>Hora actual (0-23):</label><br>
+        <input type="number" name="hora" value="0"><br><br>
+
+        <label>Minutos actuales (0-59):</label><br>
+        <input type="number" name="minuto" value="0"><br><br>
+
+        <button type="submit">{{ 'Actualizar Turno' if editar else 'Registrar Turno' }}</button>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <h2>Turnos registrados:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Especialidad</th>
+                <th>Hora Estimada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turno in turnos %}
+            <tr>
+                <td>{{ turno.nombre }}</td>
+                <td>{{ turno.edad }}</td>
+                <td>{{ turno.especialidad }}</td>
+                <td>{{ turno.hora }}</td>
+                <td>
+                    <a href="{{ url_for('editar', index=loop.index0) }}">Editar</a> |
+                    <a href="{{ url_for('eliminar', index=loop.index0) }}" onclick="return confirm('¿Eliminar este turno?');">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+<a href="{{ url_for('descargar') }}">
+    <button>📥 Descargar CSV</button>
+</a>
+</body>
+</html>
